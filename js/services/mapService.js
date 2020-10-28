@@ -1,4 +1,4 @@
-import { mapUtils } from './services/utils.js'
+import { mapUtils } from './utils.js'
 
 export const mapService = {
     getLocs,
