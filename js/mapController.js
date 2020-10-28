@@ -52,6 +52,14 @@ export function initMap(lat = 32.0749831, lng = 34.9120554) {
         })
 }
 
+function getPosition() {
+    console.log('Getting Pos');
+
+    return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+    })
+}
+
 function addMarker(loc) {
     var marker = new google.maps.Marker({
         position: loc,
@@ -64,14 +72,6 @@ function addMarker(loc) {
 function panTo(lat, lng) {
     var laLatLng = new google.maps.LatLng(lat, lng);
     gMap.panTo(laLatLng);
-}
-
-function getPosition() {
-    console.log('Getting Pos');
-
-    return new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject)
-    })
 }
 
 
