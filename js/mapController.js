@@ -74,16 +74,9 @@ export function initMap(lat = 32.0853, lng = 34.7818) {
             }
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
-<<<<<<< HEAD
-                center: { lat, lng },
-                zoom: 15
-            })
-            console.log('Map!', gMap);
-=======
                     center: { lat, lng },
                     zoom: 15
                 })
->>>>>>> abf4d74d40d155aa3d0a1e7323d22934dc42baf7
             google.maps.event.addListener(gMap, "click", (event) => {
                 var location = { lat: event.latLng.lat(), lng: event.latLng.lng() }
                 gLat = location.lat;
