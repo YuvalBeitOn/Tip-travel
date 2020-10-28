@@ -38,13 +38,10 @@ window.onload = () => {
 }
 
 
-document.querySelector('.curr-location-btn').addEventListener('click', (ev) => {
-    console.log('Aha!', ev.target);
+document.querySelector('.curr-location-btn').addEventListener('click', () => {
     getPosition()
         .then(pos => {
             panTo(pos.coords.latitude, pos.coords.longitude);
-            gLat = pos.coords.latitude;
-            gLng = pos.coords.longitude;
             console.log('User position is:', pos.coords);
         })
         .catch(err => {
@@ -52,6 +49,18 @@ document.querySelector('.curr-location-btn').addEventListener('click', (ev) => {
         })
 })
 
+document.querySelector('.copy-btn').addEventListener('click', copyToClipboard)
+
+
+function copyToClipboard () {
+        const el = document.createElement('textarea');
+        el.value = createUrl();
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+
+}
 
 export function initMap(lat = 32.0853, lng = 34.7818) {
     console.log('InitMap');
@@ -75,6 +84,9 @@ export function initMap(lat = 32.0853, lng = 34.7818) {
             google.maps.event.addListener(gMap, "click", (event) => {
                 console.log('map clicked')
                 var location = { lat: event.latLng.lat(), lng: event.latLng.lng() }
+                gLat = location.lat;
+                gLng = location.lng;
+                console.log( gLat, gLng);
                 // gLat = event.latLng.lat();
                 // gLng = event.latLng.lng();
                 // console.log(gLat, gLng);
