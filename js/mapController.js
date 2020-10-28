@@ -36,7 +36,8 @@ window.onload = () => {
         })
 
     const urlParams = new URLSearchParams(window.location.search);
-    const myParam = urlParams.get('lat','lng');
+    const params = ['lat', 'lng'];
+    const myParam = urlParams.get(params);
     console.log(myParam);
 }
 
@@ -61,16 +62,16 @@ export function initMap(gLat, gLng) {
             console.log('google available');
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
-                    center: { gLat, gLng },
-                    zoom: 15
-                })
+                center: { gLat, gLng },
+                zoom: 15
+            })
             console.log('Map!', gMap);
             google.maps.event.addListener(gMap, "click", (event) => {
                 console.log('map clicked')
                 var location = { lat: event.latLng.lat(), lng: event.latLng.lng() }
-                    // gLat = event.latLng.lat();
-                    // gLng = event.latLng.lng();
-                    // console.log(gLat, gLng);
+                // gLat = event.latLng.lat();
+                // gLng = event.latLng.lng();
+                // console.log(gLat, gLng);
                 var placeName = prompt('Enter place Name');
                 if (!placeName) return;
                 // addMarker(location, map);
