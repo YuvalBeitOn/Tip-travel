@@ -36,7 +36,7 @@ window.onload = () => {
         })
 
     const urlParams = new URLSearchParams(window.location.search);
-    const myParam = urlParams.get('lat');
+    const myParam = urlParams.get('lat','lng');
     console.log(myParam);
 }
 
