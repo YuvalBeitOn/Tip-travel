@@ -3,12 +3,12 @@ import { mapService } from './services/mapService.js'
 var gMap;
 console.log('Main!');
 
+
 // document.querySelector('.search-form').addEventListener('submit', onSearchLoc)
 
 // function onSearchLoc() {
 
 // }
-
 
 
 mapService.getLocs()
@@ -55,6 +55,14 @@ export function initMap(lat = 32.0749831, lng = 34.9120554) {
                     zoom: 15
                 })
             console.log('Map!', gMap);
+            google.maps.event.addListener(map, "click", (event) => {
+                var location = { lat: event.latLng.lat(), lng: event.latLng.lng() }
+                var placeName = prompt('Enter place Name');
+                if (!placeName) return;
+                // addMarker(location, map);
+                addPlace(location, placeName);
+                // renderPlaces();
+            });
         })
 }
 
