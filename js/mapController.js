@@ -1,11 +1,11 @@
 import { mapService } from './services/mapService.js'
 
 var gMap;
-var gLat = 29.55805;
-var gLng = 34.94821;
-var myParam = 'git';
+var gLat = 32.0853;
+var gLng = 34.7818;
 
 console.log('Main!');
+console.log(createUrl());
 
 
 // document.querySelector('.search-form').addEventListener('submit', onSearchLoc)
@@ -43,6 +43,8 @@ document.querySelector('.curr-location-btn').addEventListener('click', (ev) => {
     getPosition()
         .then(pos => {
             panTo(pos.coords.latitude, pos.coords.longitude);
+            gLat = pos.coords.latitude;
+            gLng = pos.coords.longitude;
             console.log('User position is:', pos.coords);
         })
         .catch(err => {
@@ -52,13 +54,12 @@ document.querySelector('.curr-location-btn').addEventListener('click', (ev) => {
 
 
 export function initMap(lat = 32.0853, lng = 34.7818) {
-    console.log(gLat, gLng);
     console.log('InitMap');
     return _connectGoogleApi()
         .then(() => {
             const urlParams = new URLSearchParams(window.location.search);
-            const latSearch = urlParams.get('lat');
-            const lngSearch = urlParams.get('lng');
+            const latSearch = +urlParams.get('lat');
+            const lngSearch = +urlParams.get('lng');
 
             if (latSearch && lngSearch) {
                 lat = latSearch;
@@ -157,4 +158,8 @@ function onDeletePlace(placeId) {
     console.log('deleting');
     mapService.deletePlace(placeId);
     renderLocations();
+}
+
+function createUrl() {
+    return `https://yuvalbeiton.github.io/Travel-Tip/index.html?lat=${gLat}&lng=${gLng}`
 }
