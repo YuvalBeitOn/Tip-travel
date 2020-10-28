@@ -38,7 +38,12 @@ window.onload = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const latSearch = urlParams.get('lat');
     const lngSearch = urlParams.get('lng');
-    console.log(latSearch,lngSearch);
+
+    if (latSearch && lngSearch) panTo(latSearch, lngSearch);
+
+    gLat = latSearch;
+    gLng = lngSearch;
+    console.log(latSearch, lngSearch);
 }
 
 document.querySelector('.curr-location-btn').addEventListener('click', (ev) => {
@@ -54,7 +59,7 @@ document.querySelector('.curr-location-btn').addEventListener('click', (ev) => {
 })
 
 
-export function initMap(gLat, gLng) {
+export function initMap(lat = 32.0749831, lng = 34.9120554) {
     console.log(gLat, gLng);
     console.log('InitMap');
     return _connectGoogleApi()
@@ -62,7 +67,7 @@ export function initMap(gLat, gLng) {
             console.log('google available');
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
-                center: { gLat, gLng },
+                center: { lat, lng },
                 zoom: 15
             })
             console.log('Map!', gMap);
