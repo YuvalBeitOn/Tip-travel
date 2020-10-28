@@ -35,19 +35,8 @@ window.onload = () => {
             console.log('err!!!', err);
         })
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const latSearch = urlParams.get('lat');
-    const lngSearch = urlParams.get('lng');
-    console.log('lat, lng' ,+latSearch, +lngSearch);
-    if (latSearch && lngSearch){
-        console.log('panning')
-        initMap(+latSearch, +lngSearch);
-    }
-
-    gLat = latSearch;
-    gLng = lngSearch;
-    console.log(latSearch, lngSearch);
 }
+
 
 document.querySelector('.curr-location-btn').addEventListener('click', (ev) => {
     console.log('Aha!', ev.target);
@@ -62,11 +51,19 @@ document.querySelector('.curr-location-btn').addEventListener('click', (ev) => {
 })
 
 
-export function initMap(lat = 32.0749831, lng = 34.9120554) {
+export function initMap(lat = 32.0853, lng = 34.7818) {
     console.log(gLat, gLng);
     console.log('InitMap');
     return _connectGoogleApi()
         .then(() => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const latSearch = urlParams.get('lat');
+            const lngSearch = urlParams.get('lng');
+
+            if (latSearch && lngSearch) {
+                lat = latSearch;
+                lng = lngSearch;
+            }
             console.log('google available');
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
