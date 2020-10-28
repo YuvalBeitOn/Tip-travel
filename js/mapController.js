@@ -51,13 +51,13 @@ document.querySelector('.curr-location-btn').addEventListener('click', () => {
 document.querySelector('.copy-btn').addEventListener('click', copyToClipboard)
 
 
-function copyToClipboard () {
-        const el = document.createElement('textarea');
-        el.value = createUrl();
-        document.body.appendChild(el);
-        el.select();
-        document.execCommand('copy');
-        document.body.removeChild(el);
+function copyToClipboard() {
+    const el = document.createElement('textarea');
+    el.value = createUrl();
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
 
 }
 
@@ -83,18 +83,8 @@ export function initMap(lat = 32.0853, lng = 34.7818) {
             google.maps.event.addListener(gMap, "click", (event) => {
                 console.log('map clicked')
                 var location = { lat: event.latLng.lat(), lng: event.latLng.lng() }
-<<<<<<< HEAD
                 gLat = location.lat;
                 gLng = location.lng;
-                console.log( gLat, gLng);
-                // gLat = event.latLng.lat();
-                // gLng = event.latLng.lng();
-                // console.log(gLat, gLng);
-=======
-                    // gLat = event.latLng.lat();
-                    // gLng = event.latLng.lng();
-                    // console.log(gLat, gLng);
->>>>>>> 6b926689da1c2372a730fc06fb0e207a8ac7db6f
                 var placeName = prompt('Enter place Name');
                 if (!placeName) return;
                 // addMarker(location, map);
