@@ -1,6 +1,10 @@
 import { mapService } from './services/mapService.js'
 
 var gMap;
+var gLat = 29.55805;
+var gLng = 34.94821;
+var myParam = 'git';
+
 console.log('Main!');
 
 
@@ -9,6 +13,7 @@ console.log('Main!');
 // function onSearchLoc() {
 
 // }
+
 
 
 mapService.getLocs()
@@ -29,6 +34,12 @@ window.onload = () => {
         .catch(err => {
             console.log('err!!!', err);
         })
+
+    serachUrl() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const myParam = urlParams.get('myParam');
+        console.log('myParam');
+    }
 }
 
 document.querySelector('.curr-location-btn').addEventListener('click', (ev) => {
@@ -44,20 +55,24 @@ document.querySelector('.curr-location-btn').addEventListener('click', (ev) => {
 })
 
 
-export function initMap(lat = 32.0749831, lng = 34.9120554) {
+export function initMap(gLat, gLng) {
+    console.log(gLat, gLng);
     console.log('InitMap');
     return _connectGoogleApi()
         .then(() => {
             console.log('google available');
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
-                center: { lat, lng },
-                zoom: 15
-            })
+                    center: { gLat, gLng },
+                    zoom: 15
+                })
             console.log('Map!', gMap);
             google.maps.event.addListener(gMap, "click", (event) => {
                 console.log('map clicked')
                 var location = { lat: event.latLng.lat(), lng: event.latLng.lng() }
+                    // gLat = event.latLng.lat();
+                    // gLng = event.latLng.lng();
+                    // console.log(gLat, gLng);
                 var placeName = prompt('Enter place Name');
                 if (!placeName) return;
                 // addMarker(location, map);
