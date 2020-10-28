@@ -31,6 +31,7 @@ window.onload = () => {
             const urlParams = new URLSearchParams(window.location.search);
             const latSearch = urlParams.get('lat');
             const lngSearch = urlParams.get('lng');
+            console.log(latSearch, lngSearch)
 
             if (latSearch && lngSearch) panTo(latSearch, lngSearch);
 
