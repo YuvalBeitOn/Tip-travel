@@ -36,9 +36,9 @@ window.onload = () => {
         })
 
     const urlParams = new URLSearchParams(window.location.search);
-    const params = ['lat', 'lng'];
-    const myParam = urlParams.get(params);
-    console.log(myParam);
+    const latSearch = urlParams.get('lat');
+    const lngSearch = urlParams.get('lng');
+    console.log(latSearch,lngSearch);
 }
 
 document.querySelector('.curr-location-btn').addEventListener('click', (ev) => {
