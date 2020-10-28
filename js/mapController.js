@@ -34,6 +34,7 @@ window.onload = () => {
         .catch(err => {
             console.log('err!!!', err);
         })
+    renderLocations();
 }
 
 
@@ -76,19 +77,24 @@ export function initMap(lat = 32.0853, lng = 34.7818) {
             console.log('google available');
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
-                    center: { lat, lng },
-                    zoom: 15
-                })
+                center: { lat, lng },
+                zoom: 15
+            })
             console.log('Map!', gMap);
             google.maps.event.addListener(gMap, "click", (event) => {
                 console.log('map clicked')
                 var location = { lat: event.latLng.lat(), lng: event.latLng.lng() }
                 gLat = location.lat;
                 gLng = location.lng;
+                console.log(gLat, gLng);
+                // gLat = event.latLng.lat();
+                // gLng = event.latLng.lng();
+                // console.log(gLat, gLng);
                 var placeName = prompt('Enter place Name');
                 if (!placeName) return;
                 // addMarker(location, map);
                 mapService.addPlace(location, placeName);
+                renderCurrLocation(placeName);
                 renderLocations();
             });
         })
@@ -132,7 +138,9 @@ function _connectGoogleApi() {
 }
 
 function renderLocations() {
+    console.log('rendering');
     var places = mapService.getLocations();
+    console.log(places);
     var strHtml = places.map(place => `
         <li class="place  flex space-between align-center">${place.name}
         <div class="btns-container">
@@ -159,6 +167,10 @@ function renderLocations() {
         })
     });
 
+}
+
+function renderCurrLocation(placeName) {
+    document.querySelector('.selected-loc').innerHTML = placeName;
 }
 
 function onDeletePlace(placeId) {
