@@ -41,7 +41,7 @@ window.onload = () => {
     console.log('lat, lng' ,latSearch, lngSearch);
     if (latSearch && lngSearch){
         console.log('panning')
-        panTo(latSearch, lngSearch);
+        panTo(+latSearch, +lngSearch);
     }
 
     gLat = latSearch;
