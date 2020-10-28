@@ -10,10 +10,31 @@
 </head>
 
 <body>
-    <h1>ES6</h1>
-    <div id="map" style="width: 100%; height: 400px;"></div>
-    <h3>Current Position:</h3>
-    <button class="curr-location-btn"><i class="fas fa-map-marked-alt"></i></button>
+    <header class="header-container">
+        <h1>Travel Tip</h1>
+        <nav>
+            <form class="search-form">
+                <input type="text" name="search-loc" placeholder="Enter Location">
+                <button>Go</button>
+            </form>
+            <button class="curr-location-btn">My Location</button>
+        </nav>
+    </header>
+    <section>
+        <div>
+            <span class="selected-loc"></span>Location:
+        </div>
+    </section>
+
+    <section>
+        <div id="map" style="width: 100%; height: 400px;"></div>
+        <div class="aside-container">
+            <div class="weather">Weather</div>
+            <div class="table">Locations Table</div>
+        </div>
+
+    </section>
+
     <script type="module" src="js/mapController.js"></script>
 </body>
 

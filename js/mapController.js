@@ -3,13 +3,20 @@ import { mapService } from './services/mapService.js'
 var gMap;
 console.log('Main!');
 
+// document.querySelector('.search-form').addEventListener('submit', onSearchLoc)
+
+// function onSearchLoc() {
+
+// }
+
+
+
 mapService.getLocs()
     .then(locs => console.log('locs', locs))
 
 window.onload = () => {
     initMap()
         .then(() => {
-
             addMarker({ lat: 32.0749831, lng: 34.9120554 });
         })
         .catch(console.log('INIT MAP ERROR'));
@@ -24,9 +31,16 @@ window.onload = () => {
         })
 }
 
-document.querySelector('.btn').addEventListener('click', (ev) => {
+document.querySelector('.curr-location-btn').addEventListener('click', (ev) => {
     console.log('Aha!', ev.target);
-    panTo(35.6895, 139.6917);
+    getPosition()
+        .then(pos => {
+            panTo(pos.coords.latitude, pos.coords.longitude);
+            console.log('User position is:', pos.coords);
+        })
+        .catch(err => {
+            console.log('err!!!', err);
+        })
 })
 
 
