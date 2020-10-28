@@ -38,7 +38,7 @@ window.onload = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const latSearch = urlParams.get('lat');
     const lngSearch = urlParams.get('lng');
-    console.log('lat, lng' ,latSearch, lngSearch);
+    console.log('lat, lng' ,+latSearch, +lngSearch);
     if (latSearch && lngSearch){
         console.log('panning')
         panTo(+latSearch, +lngSearch);
