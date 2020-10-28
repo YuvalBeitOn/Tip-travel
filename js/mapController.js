@@ -28,21 +28,25 @@ window.onload = () => {
 
     getPosition()
         .then(pos => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const latSearch = urlParams.get('lat');
-            const lngSearch = urlParams.get('lng');
-            console.log(latSearch, lngSearch)
 
-            if (latSearch && lngSearch) panTo(latSearch, lngSearch);
-
-            gLat = latSearch;
-            gLng = lngSearch;
-            console.log(latSearch, lngSearch);
             console.log('User position is:', pos.coords);
         })
         .catch(err => {
             console.log('err!!!', err);
         })
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const latSearch = urlParams.get('lat');
+    const lngSearch = urlParams.get('lng');
+    console.log('lat, lng' ,latSearch, lngSearch);
+    if (latSearch && lngSearch){
+        console.log('panning')
+        panTo(latSearch, lngSearch);
+    }
+
+    gLat = latSearch;
+    gLng = lngSearch;
+    console.log(latSearch, lngSearch);
 }
 
 document.querySelector('.curr-location-btn').addEventListener('click', (ev) => {
