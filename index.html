@@ -10,36 +10,35 @@
 </head>
 
 <body class="container">
-    <header class="header-container flex space-between">
+    <header class="header-container flex space-between align-center">
         <h1>Travel Tip</h1>
         <nav class="flex">
             <form class="search-form">
-                <input type="text" name="search-loc" placeholder="Enter Location">
-                <button>Go</button>
+                <input class="search-loc" type="text" name="search-loc" placeholder="Enter Location">
+                <button class="serach-btn">Go</button>
             </form>
             <button class="curr-location-btn">My Location</button>
         </nav>
     </header>
     <section class="select-loc-container flex space-between">
-        <div>
-            <span class="selected-loc"></span>Location:
+        <div class="loc-container">Location:
+            <span class="selected-loc">render from js</span>
         </div>
         <button>Copy Location</button>
     </section>
 
     <section class="flex space-between">
         <div style="width: 50%;" class="aside-container">
-            <div class="weather">Weather</div>
-            <div class="table">Locations Table:
+            <div class="weather"><img src="img/weather.png" alt=""></div>
+            <div class="loc-table">Locations
                 <ul class="locations-list">
-        
                 </ul>
             </div>
         </div>
-        <div id="map" style="width: 50%; height: 500px;"></div>
+        <div id="map" style="width: 70%; height: 500px;"></div>
     </section>
 
-    <footer>coffee-rights Yuval&Dana</footer>
+    <footer class="main-footer">coffee-rights Yuval&Dana</footer>
 
     <script type="module" src="js/mapController.js"></script>
 </body>

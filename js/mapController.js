@@ -3,7 +3,6 @@ import { mapService } from './services/mapService.js'
 var gMap;
 var gLat = 29.55805;
 var gLng = 34.94821;
-var myParam = 'git';
 
 console.log('Main!');
 
@@ -34,12 +33,6 @@ window.onload = () => {
         .catch(err => {
             console.log('err!!!', err);
         })
-
-    serachUrl() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const myParam = urlParams.get('myParam');
-        console.log('myParam');
-    }
 }
 
 document.querySelector('.curr-location-btn').addEventListener('click', (ev) => {
@@ -122,7 +115,7 @@ function _connectGoogleApi() {
 function renderLocations() {
     var places = mapService.getLocations();
     var strHtml = places.map(place => `
-        <li>${place.name}
+        <li class="place  flex space-between align-center">${place.name}
         <div class="btns-container">
         <button data-id="${place.id}" class="delete-btn">delete</button>
         <button data-id="${place.id}" class="go-btn">go</button>
