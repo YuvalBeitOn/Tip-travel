@@ -69,5 +69,6 @@ function getPlaceIdxById(placeId) {
 }
 
 function getLocations() {
-    return gPlaces;
+    var places = mapStorage.loadFromStorage(STORAGE_KEY_PLACES)
+    return places;
 }

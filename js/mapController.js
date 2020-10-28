@@ -3,18 +3,7 @@ import { mapService } from './services/mapService.js'
 var gMap;
 var gLat = 32.0853;
 var gLng = 34.7818;
-
-console.log('Main!');
-console.log(createUrl());
-
-
-// document.querySelector('.search-form').addEventListener('submit', onSearchLoc)
-
-// function onSearchLoc() {
-
-// }
-
-
+const API = 'AIzaSyCmhCBEHJkdIG3m11Ua7ZsKbz3u9nMJBuI';
 
 mapService.getLocs()
     .then(locs => console.log('locs', locs))
@@ -36,6 +25,15 @@ window.onload = () => {
         })
     renderLocations();
 }
+
+// document.querySelector('.search-loc').addEventListener('click', onSearchPlace)
+
+// function onSearchPlace() {
+//     var splitInput = document.querySelector('.search-loc').value.split(',');
+//     splitInput.join('+');
+//     console.log(splitInput);
+//     window.open(`https://maps.googleapis.com/maps/api/geocode/json?address=${splitInput}&key=${API}`);
+// }
 
 
 document.querySelector('.curr-location-btn').addEventListener('click', () => {
@@ -63,7 +61,7 @@ function copyToClipboard() {
 }
 
 export function initMap(lat = 32.0853, lng = 34.7818) {
-    console.log('InitMap');
+    renderLocations();
     return _connectGoogleApi()
         .then(() => {
             const urlParams = new URLSearchParams(window.location.search);
@@ -74,15 +72,19 @@ export function initMap(lat = 32.0853, lng = 34.7818) {
                 lat = latSearch;
                 lng = lngSearch;
             }
-            console.log('google available');
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
+<<<<<<< HEAD
                 center: { lat, lng },
                 zoom: 15
             })
             console.log('Map!', gMap);
+=======
+                    center: { lat, lng },
+                    zoom: 15
+                })
+>>>>>>> abf4d74d40d155aa3d0a1e7323d22934dc42baf7
             google.maps.event.addListener(gMap, "click", (event) => {
-                console.log('map clicked')
                 var location = { lat: event.latLng.lat(), lng: event.latLng.lng() }
                 gLat = location.lat;
                 gLng = location.lng;
@@ -101,8 +103,6 @@ export function initMap(lat = 32.0853, lng = 34.7818) {
 }
 
 function getPosition() {
-    console.log('Getting Pos');
-
     return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(resolve, reject);
     })
@@ -121,7 +121,6 @@ function panTo(lat, lng) {
     var laLatLng = new google.maps.LatLng(lat, lng);
     gMap.panTo(laLatLng);
 }
-
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
@@ -142,7 +141,7 @@ function renderLocations() {
     var places = mapService.getLocations();
     console.log(places);
     var strHtml = places.map(place => `
-        <li class="place  flex space-between align-center">${place.name}
+        <li class="place flex space-between align-center">${place.name}
         <div class="btns-container">
         <button data-id="${place.id}" class="delete-btn">delete</button>
         <button data-id="${place.id}" class="go-btn">go</button>
@@ -153,14 +152,12 @@ function renderLocations() {
     document.querySelector('.locations-list').innerHTML = strHtml;
 
     document.querySelectorAll('.delete-btn').forEach(elBtn => {
-        console.log(elBtn)
         elBtn.addEventListener('click', () => {
             onDeletePlace(elBtn.dataset.id);
         })
     });
 
     document.querySelectorAll('.go-btn').forEach(elBtn => {
-        console.log(elBtn)
         elBtn.addEventListener('click', () => {
             var place = mapService.getPlaceById(elBtn.dataset.id);
             panTo(place.lat, place.lng);
@@ -174,7 +171,6 @@ function renderCurrLocation(placeName) {
 }
 
 function onDeletePlace(placeId) {
-    console.log('deleting');
     mapService.deletePlace(placeId);
     renderLocations();
 }
