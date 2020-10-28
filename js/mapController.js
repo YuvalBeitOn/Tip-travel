@@ -29,6 +29,10 @@ window.onload = () => {
         .catch(err => {
             console.log('err!!!', err);
         })
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const myParam = urlParams.get('lat');
+    console.log(myParam);
 }
 
 document.querySelector('.curr-location-btn').addEventListener('click', (ev) => {
